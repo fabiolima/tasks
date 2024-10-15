@@ -282,8 +282,6 @@ Devise.setup do |config|
 
     manager.strategies.add(:remote_authenticatable, Devise::Strategies::RemoteAuthenticatable)
     manager.default_strategies(scope: :user).unshift :remote_authenticatable
-
-    # manager.default_strategies(scope: :user).unshift :some_external_strategy
   end
 
   Devise.add_module :remote_authenticatable, controller: :sessions, route: { session: :routes }

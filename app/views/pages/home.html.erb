@@ -1,4 +1,12 @@
 <div>
+  <% if user_signed_in? %>
+    <span>Hello <%= current_user.email %></span>
+    <%= button_to "Log out", destroy_user_session_path, method: :delete %>
+  <% else %>
+    <%= link_to "Log in", new_user_session_path %>
+  <% end %>
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
   <h1 class="font-bold text-4xl">Pages#home</h1>
   <p>Find me in app/views/pages/home.html.erb</p>
 </div>

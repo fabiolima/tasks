@@ -16,6 +16,11 @@ class TasksController < ApplicationController
     @task = Task.new task_params
 
     if @task.save!
+      ActionCable.server.broadcast("tasks", {
+        name: "teste",
+        message: "teste"
+      })
+
       redirect_to tasks_path
     else
       render :create

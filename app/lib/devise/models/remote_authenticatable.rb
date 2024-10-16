@@ -12,6 +12,7 @@ module Devise
         return false unless response.code.to_i == 200
 
         payload = JSON.parse(response.body)
+        self.id = payload["data"]["user"]["id"]
         self.email = payload["data"]["user"]["email"]
         self.token = payload["data"]["token"]
         self
@@ -21,6 +22,7 @@ module Devise
         # Build a user from previous serialized session's data
         def serialize_from_session(data, salt)
           resource = self.new
+          resource.id = data["id"]
           resource.email = data["email"]
           resource.token = data["token"]
           resource
@@ -28,7 +30,7 @@ module Devise
 
         # Serialize user into session
         def serialize_into_session(record)
-          [ { email: record.email, token: record.token }, nil ]
+          [ { email: record.email, token: record.token, id: record.id }, nil ]
         end
       end
     end

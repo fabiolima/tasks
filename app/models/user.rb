@@ -7,7 +7,7 @@ class User
   # Attach model callbacks only to validation method.
   define_model_callbacks :validation
 
-  attr_accessor :email, :password, :token
+  attr_accessor :id, :email, :password, :token
 
   devise :remote_authenticatable, :timeoutable
 end

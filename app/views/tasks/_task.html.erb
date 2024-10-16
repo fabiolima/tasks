@@ -1,0 +1,14 @@
+<li class="py-3 flex items-center border-b" >
+  <p class="w-[200px] hidden sm:block">
+    <%= task.title %>
+  </p>
+  <p class="w-[200px] truncate">
+    <span> <%= task.status %> </span>
+  </p>
+  <p class="w-[200px] truncate">
+    <span><%= task.task_type %> </span>
+  </p>
+  <div class="flex flex-1 justify-end">
+    <%= link_to "show", task_path(task.id), class: "btn-primary-sm-outline inline-flex items-center" %>
+  </div>
+</li>

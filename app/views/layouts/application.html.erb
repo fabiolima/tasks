@@ -15,9 +15,22 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
-  <body>
-    <main class="">
-      <%= yield %>
+  <body class="bg-slate-100">
+    <header class="max-w-4xl mx-auto py-4">
+      <h2 class="text-xl font-bold text-center">
+        <%= yield :page_title %>
+      </h2>
+    </header>
+    <main class="px-4 min-h-screen ml-0 overflow-auto">
+      <div class="max-w-4xl mx-auto">
+        <%= yield :pre_content %>
+        <% if flash["notice"] %>
+          <p class="p-4 bg-indigo-100 rounded-xl mb-4">
+            <%= flash["notice"] %>
+          </p>
+        <% end %>
+        <%= yield %>
+      </div>
     </main>
   </body>
 </html>

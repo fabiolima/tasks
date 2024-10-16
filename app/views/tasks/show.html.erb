@@ -1,0 +1,60 @@
+<%= content_for :page_title do %> Task #<%= @task.id %> <%end%>
+<% content_for :pre_content do %>
+  <div class="flex items-center justify-end mb-4">
+    <div class="flex-1">
+      <%= link_to tasks_path, class: "w-auto inline-block text-gray-800 p-1 px-2 text-sm" do %>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 inline-block me-1">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18" />
+        </svg>
+        Back to tasks
+      <% end %>
+    </div>
+    <div class="flex items-center space-x-2">
+      <%= link_to edit_task_path(@task), {
+        class: "btn-primary-sm-outline"
+      } do %>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="inline-block size-4 mr-1">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+        </svg>
+        Edit Task
+      <% end %>
+    </div>
+  </div>
+<% end %>
+<div class="p-4 md:p-8 bg-white rounded-3xl mb-8">
+  <h4 class="text-2xl font-bold mb-4">Basic information</h4>
+  <div class="flex flex-col md:flex-row">
+    <div class="space-y-3 flex-1 mb-3 md:mb-0 ">
+      <div>
+        <p class="font-semibold ">id</p>
+        <p><%= @task.id %></p>
+      </div>
+      <div>
+        <p class="font-semibold ">Status</p>
+        <p><%= @task.status %></p>
+      </div>
+      <div>
+        <p class="font-semibold ">Task Type</p>
+        <p><%= @task.task_type %></p>
+      </div>
+      <div>
+        <p class="font-semibold ">URL</p>
+        <p><%= @task.url %></p>
+      </div>
+      <div>
+        <p class="font-semibold ">Created at</p>
+        <p><%= @task.created_at.to_formatted_s(:long) %></p>
+      </div>
+      <div>
+        <p class="font-semibold ">Updated at</p>
+        <p><%= @task.updated_at.to_formatted_s(:long) %></p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="p-4 md:p-8 bg-white rounded-3xl">
+  <h4 class="text-2xl font-bold mb-4">Results</h4>
+  <div class="flex flex-col md:flex-row">
+    @TODO
+  </div>
+</div>

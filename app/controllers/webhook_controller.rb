@@ -13,6 +13,11 @@ class WebhookController < ApplicationController
 
   private
 
+  def set_event
+    json_body = JSON.parse(request.body.read, symbolize_names: true)
+    @event = json_body[:event]
+  end
+
   def handle_status_completed(event)
     task = Task.find(event[:resource][:id])
     task.update(result: event[:result], status: Task.statuses[:completed])
@@ -23,11 +28,6 @@ class WebhookController < ApplicationController
     task = Task.find(event[:resource][:id])
     task.update(status: Task.statuses[:error], error_message: event[:error_message])
     broadcast_task task
-  end
-
-  def set_event
-    json_body = JSON.parse(request.body.read, symbolize_names: true)
-    @event = json_body[:event]
   end
 
   def broadcast_task(task)

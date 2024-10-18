@@ -1,9 +1,20 @@
+<%
+  status = task.status.to_sym
+  colors = {
+    completed: "bg-green-100 text-green-800 border-color-400",
+    pending: "bg-yellow-100 text-yellow-800 border-yellow-400",
+    error: "bg-red-100 text-red-800 border-red-400"
+  }
+%>
+
 <li class="py-3 flex items-center border-b" >
   <p class="w-[200px] hidden sm:block">
     <%= task.title %>
   </p>
   <p class="w-[200px] truncate">
-    <span> <%= task.status %> </span>
+    <span class="<%= colors[status]%> text-xs font-medium me-2 px-2.5 py-0.5 rounded border">
+      <%= task.status %>
+    </span>
   </p>
   <p class="w-[200px] truncate">
     <span><%= task.task_type %> </span>

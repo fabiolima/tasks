@@ -1,0 +1,76 @@
+<%
+  status = task.status.to_sym
+  colors = {
+    completed: "bg-green-100 text-green-800 border-color-400",
+    pending: "bg-yellow-100 text-yellow-800 border-yellow-400",
+    error: "bg-red-100 text-red-800 border-red-400"
+  }
+%>
+<section
+  data-controller="tasks"
+  data-tasks-task-id-value="<%= task.id %>"
+  data-tasks-task-status-value="<%= task.status %>"
+  data-tasks-result-value="<%= task.result.present? ? task.result.to_json : "" %>"
+>
+  <div class="p-4 md:p-8 bg-white rounded-3xl mb-8">
+    <h4 class="text-2xl font-bold mb-4">Basic information</h4>
+    <div class="flex flex-col md:flex-row">
+      <div class="space-y-3 flex-1 mb-3 md:mb-0 ">
+        <div>
+          <p class="font-semibold">id</p>
+          <p><%= task.id %></p>
+        </div>
+        <div>
+          <p class="font-semibold ">Status</p>
+          <p>
+            <span class="<%= colors[status]%> text-xs font-medium me-2 px-2.5 py-0.5 rounded border">
+              <%= task.status %>
+            </span>
+          </p>
+        </div>
+        <div>
+          <p class="font-semibold ">Task Type</p>
+          <p><%= task.task_type %></p>
+        </div>
+        <div>
+          <p class="font-semibold ">URL</p>
+          <p><%= task.url %></p>
+        </div>
+        <div>
+          <p class="font-semibold ">Created at</p>
+          <p><%= task.created_at.to_formatted_s(:long) %></p>
+        </div>
+        <div>
+          <p class="font-semibold ">Updated at</p>
+          <p><%= task.updated_at.to_formatted_s(:long) %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="p-4 md:p-8 bg-white rounded-3xl">
+    <h4 class="text-2xl font-bold mb-4">Results</h4>
+    <div class="flex flex-col md:flex-row">
+      <% if task.result.present? && task.completed? %>
+        <pre data-tasks-target="results" class="json-container w-full p-8">
+        </pre>
+      <% end %>
+      <% if task.pending? %>
+        <div>
+          <div role="status" class="flex">
+            <svg aria-hidden="true" class="me-2 inline w-6 h-6 text-gray-200 animate-spin  fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+              <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+            </svg>
+            <span class="sr-only">Loading...</span>
+            Processing...
+          </div>
+        </div>
+      <% end %>
+      <% if task.error? %>
+        <p>
+          <b>Error:</b> <%= task.error_message %>
+        </p>
+      <% end %>
+    </div>
+  </div>
+</section>

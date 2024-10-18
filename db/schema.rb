@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_15_223328) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_18_032152) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,5 +22,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_15_223328) do
     t.string "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.json "result"
+    t.string "error_message"
   end
 end

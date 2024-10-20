@@ -1,12 +1,12 @@
-<%= content_for :page_title do %> New Task <%end%>
+<%= content_for :page_title do %> Edit Task #<%= @task.id %> <%end%>
 <% content_for :pre_content do %>
   <div class="flex items-center">
     <div class="flex-1">
-      <%= link_to tasks_path, class: "w-auto inline-block mb-4 text-gray-800 p-1 px-2 text-sm" do %>
+      <%= link_to task_path(@task), class: "w-auto inline-block mb-4 text-gray-800 p-1 px-2 text-sm" do %>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 inline-block me-1">
           <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18" />
         </svg>
-        Back to tasks
+        Back to task
       <% end %>
     </div>
   </div>
@@ -30,7 +30,7 @@
     </div>
   <% end %>
 
-  <%= form_with model: @task, url: tasks_path, class: "mt-10 space-y-4" do |form| %>
+  <%= form_with model: @task, class: "mt-10 space-y-4" do |form| %>
     <%= form.hidden_field :user_id, value: current_user.id %>
     <div class="field w-full">
       <%= form.label :title, class: "mb-2 block text-sm font-medium leading-6 text-gray-900" %>
@@ -50,7 +50,7 @@
       <%= form.text_field :url, autofocus: true, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
     </div>
     <div class="actions">
-      <%= form.submit "Create", class: "btn-primary", role: "button" %>
+      <%= form.submit "Update", class: "btn-primary", role: "button" %>
     </div>
   <% end %>
 </div>

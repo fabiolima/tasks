@@ -21,6 +21,10 @@
           <p><%= task.id %></p>
         </div>
         <div>
+          <p class="font-semibold">Title</p>
+          <p><%= task.title %></p>
+        </div>
+        <div>
           <p class="font-semibold ">Status</p>
           <p>
             <span class="<%= colors[status]%> text-xs font-medium me-2 px-2.5 py-0.5 rounded border">
@@ -51,7 +55,7 @@
     <h4 class="text-2xl font-bold mb-4">Results</h4>
     <div class="flex flex-col md:flex-row">
       <% if task.result.present? && task.completed? %>
-        <pre data-tasks-target="results" class="json-container w-full p-8">
+        <pre data-tasks-target="results" class="json-container w-full p-8 overflow-x-auto">
         </pre>
       <% end %>
       <% if task.pending? %>

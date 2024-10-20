@@ -20,6 +20,13 @@
     <span><%= task.task_type %> </span>
   </p>
   <div class="flex flex-1 justify-end">
-    <%= link_to "show", task_path(task.id), class: "btn-primary-sm-outline inline-flex items-center" %>
+    <%= link_to "show", task_path(task.id), class: "btn-primary-sm-outline inline-flex items-center me-2" %>
+
+    <%= button_to "delete",
+      task_path(task),
+      method: :delete,
+      form: { data: { turbo_confirm: "Are you sure?" } },
+      class: "btn-danger-sm-outline"
+    %>
   </div>
 </li>

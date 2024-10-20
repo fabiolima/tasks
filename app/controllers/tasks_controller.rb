@@ -1,12 +1,13 @@
 class TasksController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_task, only: [ :show, :edit, :update ]
-
+  before_action :set_task, only: [ :show, :edit, :update, :destroy ]
+  
+  def show; end
+  def edit; end
+  
   def index
     @tasks = Task.where(user_id: current_user.id)
   end
-
-  def show; end
 
   def new
     @task = Task.new
@@ -24,8 +25,6 @@ class TasksController < ApplicationController
     end
   end
 
-  def edit; end
-
   def update
     @task = Task::TaskUpdator.new(@task).update! task_params
 
@@ -36,6 +35,12 @@ class TasksController < ApplicationController
         format.html { render :edit, status: :unprocessable_entity }
       end
     end
+  end
+
+  def destroy
+    @task.destroy! if @task[:user_id] == current_user.id
+
+    redirect_to tasks_path
   end
 
   private

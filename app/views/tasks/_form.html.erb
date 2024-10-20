@@ -1,0 +1,43 @@
+<div class="p-4 md:p-8 bg-white rounded-3xl">
+  <h2 class="text-base font-semibold leading-7 text-gray-900">Basic information</h2>
+  
+  <% if task.errors.any? %>
+    <div id="error_explanation" data-turbo-cache="false" class="p-4 bg-indigo-100 rounded-md mt-6" >
+      <h2 class="font-semibold mb-4">
+        <%= I18n.t("errors.messages.not_saved",
+                    count: task.errors.count,
+                    resource: task.class.model_name.human.downcase)
+          %>
+      </h2>
+      <ul class="list-disc list-inside">
+        <% task.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form_with model: task, class: "mt-10 space-y-4" do |form| %>
+    <%= form.hidden_field :user_id, value: current_user.id %>
+    <div class="field w-full">
+      <%= form.label :title, class: "mb-2 block text-sm font-medium leading-6 text-gray-900" %>
+      <%= form.text_field :title, autofocus: true, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
+    </div>
+    <div class="field w-full">
+      <%= form.label :task_type, class: "mb-2 block text-sm font-medium leading-6 text-gray-900" %>
+      <%= form.select :task_type, Task.task_types.keys.map{ |key| [key.humanize, key] }, {},
+        {
+          selected: task.status || :web_scraping,
+          class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+        }
+      %>
+    </div>
+    <div class="field w-full">
+      <%= form.label :url, class: "mb-2 block text-sm font-medium leading-6 text-gray-900" %>
+      <%= form.text_field :url, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
+    </div>
+    <div class="actions">
+      <%= form.submit "Update", class: "btn-primary", role: "button" %>
+    </div>
+  <% end %>
+</div>

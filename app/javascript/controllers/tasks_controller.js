@@ -5,13 +5,15 @@ export default class extends Controller {
   static targets = ["results", "taskId", "emptyMessage"]
   static values = { taskId: String, taskStatus: String, result: String }
 
+  handler = this.onTaskChanged.bind(this)
+
   connect() {
-    window.addEventListener("taskChanged", this.onTaskChanged.bind(this))
+    window.addEventListener("taskChanged", this.handler)
     if (this.resultValue && this.taskStatusValue === "completed") this.renderResult(this.resultValue);
   }
 
   disconnect() {
-    window.removeEventListener("taskChanged", this.onTaskChanged.bind(this))
+    window.removeEventListener("taskChanged", this.handler)
   }
 
   onTaskChanged(event) {
@@ -25,6 +27,7 @@ export default class extends Controller {
 
   renderResult(result) {
     if (!this.resultsTarget) return;
+
     const html = window.prettyPrintJson.toHtml(JSON.parse(result));
     this.resultsTarget.innerHTML = html
   }

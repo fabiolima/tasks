@@ -2,13 +2,13 @@ import { Controller } from "@hotwired/stimulus"
 import { useTransition } from "stimulus-use"
 
 export default class Notification extends Controller {
-  actionUrl;
   timeout;
   enter;
   leave;
   transitioned;
+  handler = this.onTaskChanged.bind(this);
 
-  static targets = ["text", "link"]
+  static targets = ["text", "link", "errorIcon", "successIcon"]
 
   static values = {
     delay: {
@@ -28,7 +28,7 @@ export default class Notification extends Controller {
   connect() {
     useTransition(this)
 
-    window.addEventListener("taskChanged", this.onTaskChanged.bind(this))
+    window.addEventListener("taskChanged", this.handler)
 
     if (this.hiddenValue === false) {
       this.show()
@@ -36,15 +36,38 @@ export default class Notification extends Controller {
   }
 
   disconnect() {
-    window.removeEventListener("taskChanged", this.onTaskChanged.bind(this))
+    window.removeEventListener("taskChanged", this.handler)
+  }
+
+  handleTaskCompleted(task) {
+    this.textTarget.innerText = `Task ${task.title} was updated.`
+    this.linkTarget.href = `/tasks/${task.id}`
+
+    this.errorIconTarget.classList.add("hidden")
+    this.successIconTarget.classList.remove("hidden")
+
+    this.show();
+  }
+
+  handleTaskError(task) {
+    this.textTarget.innerText = `Task ${task.title} has an error.`
+    this.linkTarget.href = `/tasks/${task.id}`
+
+    this.errorIconTarget.classList.remove("hidden")
+    this.successIconTarget.classList.add("hidden")
+
+    this.show();
   }
 
   onTaskChanged(event) {
     const task = event.detail.task
-    this.textTarget.innerText = `Task ${task.title} was updated.`
-    this.linkTarget.href = `/tasks/${task.id}`
 
-    this.show();
+    switch (task.status) {
+      case "completed": 
+        this.handleTaskCompleted(task); break;
+      case "error":
+        this.handleTaskError(task); break;
+    }
   }
 
   show() {

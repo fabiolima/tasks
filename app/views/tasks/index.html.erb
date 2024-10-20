@@ -1,25 +1,21 @@
 <%= content_for :page_title do %> Tasks <%end%>
 <% content_for :pre_content do %>
-  <div class="flex items-center justify-end mb-4">
-    <div class="flex items-center space-x-2">
-      <%= link_to new_task_path, {
-        class: "btn-primary-sm-outline"
-      } do %>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="inline-block size-4 mr-1">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-        </svg>
-        New Task
-      <% end %>
+  <% if @tasks.present? %>
+    <div class="flex items-center justify-end mb-4">
+      <div class="flex items-center space-x-2">
+        <%= link_to new_task_path, {
+          class: "btn-primary-sm-outline"
+        } do %>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="inline-block size-4 mr-1">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+          </svg>
+          New Task
+        <% end %>
+      </div>
     </div>
-  </div>
+  <% end%>
 <% end %>
 <div class="p-4 md:p-8 bg-white rounded-3xl">
-  <% if false %>
-    <%= form_tag(admin_dashboard_users_path, method: :get, class: "flex mb-8") do %>
-      <%= text_field_tag(:search, params[:search], class: "w-full shadow-sm rounded px-3 border border-gray-black bg-slate-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500", placeholder: "Search by email" ) %>
-      <%= submit_tag("Search", :id => "button", :class => "ms-4 btn-primary") %>
-    <% end %>
-  <% end %>
   <% if @tasks.empty? %>
     <div class="flex space-y-4 flex-col justify-center border rounded-xl  p-6">
       <h2 class="text-gray-800 font-semibold text-lg text-center">

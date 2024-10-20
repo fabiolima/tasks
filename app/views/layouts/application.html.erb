@@ -3,7 +3,7 @@
   <head>
     <title><%= content_for(:title) || "Tasks" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= yield :head %>
@@ -17,24 +17,13 @@
   </head>
   <body class="bg-slate-100">
     <%= render partial: "shared/notification" %>
-    <%# <div
-      data-controller="notification"
-      data-notification-hidden-value="true"
-      data-action="awesome@window->notification#show"
-      class="transition transform duration-1000 hidden"
-      data-transition-enter-from="opacity-0 translate-x-6"
-      data-transition-enter-to="opacity-100 translate-x-0"
-      data-transition-leave-from="opacity-100 translate-x-0"
-      data-transition-leave-to="opacity-0 translate-x-6"
-      >
-      <p>This alert will magically disappear!</p>
-      <button data-action="notification#hide">Close</button>
-    </div> %>
+
     <header class="max-w-4xl mx-auto py-4">
       <h2 class="text-xl font-bold text-center">
         <%= yield :page_title %>
       </h2>
     </header>
+
     <main class="px-4 min-h-screen ml-0 overflow-auto">
       <div class="max-w-4xl mx-auto">
         <%= yield :pre_content %>

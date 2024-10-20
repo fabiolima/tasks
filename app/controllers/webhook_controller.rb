@@ -35,6 +35,7 @@ class WebhookController < ApplicationController
       partial: "tasks/task_details",
       locals: { task: task }
     )
+
     ActionCable.server.broadcast("tasks", { task: task, html: rendered_task_detail })
   end
 end

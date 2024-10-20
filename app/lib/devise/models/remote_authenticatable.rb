@@ -1,5 +1,3 @@
-# require "fakeweb" # used for mocking API calls
-
 module Devise
   module Models
     module RemoteAuthenticatable

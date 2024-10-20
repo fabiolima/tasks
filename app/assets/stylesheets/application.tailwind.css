@@ -1,6 +1,6 @@
+@import "./buttons.css";
+@import "https://cdn.jsdelivr.net/npm/pretty-print-json@3.0/dist/css/pretty-print-json.dark-mode.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import "./buttons.css";
-@import "https://cdn.jsdelivr.net/npm/pretty-print-json@3.0/dist/css/pretty-print-json.dark-mode.css"

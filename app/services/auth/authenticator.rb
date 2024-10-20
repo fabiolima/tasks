@@ -9,7 +9,7 @@ class Auth::Authenticator
   end
 
   def authenticate
-    uri = URI("http://localhost:3001/login")
+    uri = URI(Rails.application.credentials.endpoints.authenticate)
     payload = { user: @credentials }.to_json
     headers = { "Content-Type": "application/json" }
 

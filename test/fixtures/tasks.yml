@@ -2,10 +2,10 @@
 
 one:
   title: MyString
-  type: 1
+  task_type: 1
   url: MyString
 
 two:
   title: MyString
-  type: 1
+  task_type: 1
   url: MyString

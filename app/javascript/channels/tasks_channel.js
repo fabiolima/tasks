@@ -5,8 +5,8 @@ consumer.subscriptions.create("TasksChannel", {
 
   disconnected() { },
 
-  received(data) {
-    const event = new CustomEvent("taskChanged", { detail: data })
+  received(task) {
+    const event = new CustomEvent("taskChanged", { detail: task })
     window.dispatchEvent(event)
   }
 })

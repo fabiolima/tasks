@@ -4,7 +4,5 @@ class Task < ApplicationRecord
 
   validates :title, presence: true
   validates :url, presence: true, url: true
-  # validates :url, url: { host: /linkedin\.com\Z/ }
-
   validates :task_type, presence: true
 end

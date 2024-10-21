@@ -19,7 +19,7 @@ class Task::TaskCreator
   private
 
   def after_create
-    scrape if @task.web_scraping? 
+    scrape if @task.web_scraping?
   end
 
   def scrape
